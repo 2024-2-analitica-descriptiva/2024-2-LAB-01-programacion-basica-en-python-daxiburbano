@@ -24,3 +24,21 @@ def pregunta_09():
      'jjj': 18}}
 
     """
+    with open('files/input/data.csv', 'r') as file:
+        data= file.readlines()
+        l1= [(x.split("\t")[4].replace('\n','').split(",")) for x in data]
+
+        #1 Aplanar l1 para procesar todos los elementos (clave:valor)
+        l2= [item for sublist in l1 for item in sublist]
+
+        #2 Dividir clave:valor (valor es _ quiere decir que no se requiere)
+        data = [key for key, _ in (item.split(":") for item in l2)]
+
+        #otra forma de evitar #1 y #2
+        #import itertools
+        #data = [x.split(":")[0] for x in list(itertools.chain(*l1))]
+        
+        conteo=sorted([(x, data.count(x)) for x in set(data)])
+        return dict(conteo)
+
+print(pregunta_09())

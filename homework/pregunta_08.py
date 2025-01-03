@@ -27,3 +27,16 @@ def pregunta_08():
      (9, ['A', 'B', 'C', 'E'])]
 
     """
+    with open('files/input/data.csv', 'r') as file:
+        data= file.readlines()
+        data= [(int(x.split("\t")[1]), x.split("\t")[0]) for x in data]
+        
+        # Obtener valores unicos de los números
+        listnumber=set(item[0] for item in data)
+        agrupa=[]
+        for i in listnumber:
+            tmp=list(filter(lambda x: x[0]==i, data))
+            agrupa.append((i, sorted(set([x[1] for x in tmp]))))
+        return sorted(agrupa)
+
+print(pregunta_08())

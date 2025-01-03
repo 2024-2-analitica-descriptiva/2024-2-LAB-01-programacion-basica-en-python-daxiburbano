@@ -16,3 +16,18 @@ def pregunta_11():
 
 
     """
+    with open('files/input/data.csv', 'r') as file:
+        data= file.readlines()
+        data= [(int(x.split("\t")[1]), x.split("\t")[3]) for x in data] #entrega [(1, 'b,g,f'), (2, 'a,f,c')...]
+        data=[(key, value.split(',')) for key, value in data] #[(1, ['b', 'g', 'f']), (2, ['a', 'f', 'c'])...]
+        
+        # Obtener valores unicos de las letras
+        listletter= set(letter for _, letters in data for letter in letters)
+
+        agrupa=[]
+        for i in listletter:
+            tmp=filter(lambda x: i in x[1], data)
+            agrupa.append((i, sum([x[0] for x in tmp])))
+        return dict(sorted(agrupa))
+
+print(pregunta_11())
