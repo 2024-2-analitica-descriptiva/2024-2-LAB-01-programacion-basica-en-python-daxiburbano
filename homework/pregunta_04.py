@@ -29,7 +29,7 @@ def pregunta_04():
 
     with open('files/input/data.csv', 'r') as file:
         data= file.readlines()
-        data=[int(x.split("\t")[2][5:7]) for x in data]
+        data=[x.split("\t")[2][5:7] for x in data]
         data=sorted([(x, data.count(x)) for x in set(data)])
         return data
 
